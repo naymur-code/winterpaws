@@ -1,2 +1,36 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* .navbar li a.active{
+    background-color:aqua ;
+    font-weight: bold;
+} */
+
+
+
+navbar li a.active {
+  color: #2563eb;           /* tailwind → text-blue-600 */
+  font-weight: 600;         /* semibold */
+  position: relative;
+}
+
+.navbar li a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #2563eb;       /* Blue underline */
+  border-radius: 999px;
+  animation: activeSlide 0.3s ease-in-out;
+}
+
+@keyframes activeSlide {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
