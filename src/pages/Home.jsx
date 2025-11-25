@@ -1,14 +1,14 @@
-import React from "react";
+import Services from "../components/Services";
 import Slider from "../components/Slider";
-
 
 const Home = () => {
   return (
-    <div>
-      {/* <h1>home page..</h1> */}
-      <Slider/>
-
-    </div>
+    <>
+      <Slider />
+      <div className="container mx-auto px-5">
+        <Services />
+      </div>
+    </>
   );
 };
 
