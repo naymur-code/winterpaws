@@ -1,8 +1,9 @@
 import { FaRegStar } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
+import { Link } from "react-router";
 
 const Service = ({ service }) => {
-  const { serviceName, image, description, rating,price } = service;
+  const { serviceName, image, description, rating,price,serviceId } = service;
   return (
     <div className="card bg-base-100  shadow-sm">
       <figure>
@@ -33,7 +34,7 @@ const Service = ({ service }) => {
         <p>{description}</p>
 
         <div className="card-actions justify-end">
-          <button className="btn btn-info w-full">View Details</button>
+          <Link to={`/service/${serviceId}`} className="btn btn-info w-full">View Details</Link>
         </div>
       </div>
     </div>
