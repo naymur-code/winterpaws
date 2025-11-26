@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../assets/logo1.png";
+import { AuthContext } from "../provider/AuthProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const Navbar = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false); // control drawer open/close
+  const { user } = useContext(AuthContext);
+  const [drawerOpen, setDrawerOpen] = useState(false); 
+  
+  const handleLogout=()=>{
+    signOut(auth)
+    .then(()=>{
+      console.log('Sign-out successful.');
+    })
+    .catch(error=>console.log(error))
 
+  }
   const navLinks = (
     <>
       <li>
@@ -72,17 +84,31 @@ const Navbar = () => {
         </div>
 
         {/* Desktop */}
-        <div className="navbar-end hidden lg:flex gap-5">
-          <div className="avatar cursor-pointer">
-            <div className="w-10 rounded-full ring ring-[#2563eb] ring-offset-base-100 ring-offset-2">
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                alt="User"
-              />
+        {user ? (
+          <div className="navbar-end hidden lg:flex gap-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="avatar">
+                <div className="w-11 rounded-full">
+                  <img src={user?.photoURL} alt="" />
+                </div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-base">{user?.displayName}</h3>
+                <p className="text-sm opacity-70">{user?.email}</p>
+              </div>
             </div>
+
+            <button onClick={handleLogout} className="btn btn-error text-white btn-sm px-5">
+              Logout
+            </button>
           </div>
-          <Link className="btn btn-error text-white btn-sm px-5">Logout</Link>
-        </div>
+        ) : (
+          <div className="navbar-end hidden lg:flex gap-4">
+            <Link to="/login" className="btn btn-outline btn-info btn-sm px-5">
+              Login
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Full Page Drawer */}
@@ -90,20 +116,19 @@ const Navbar = () => {
         <div className="fixed inset-0 z-50 bg-black/50">
           <div className="fixed top-0 right-0 w-3/4 max-w-sm min-h-full bg-base-200 p-6 shadow-lg overflow-auto">
             {/* Avatar */}
-            <div className="flex items-center gap-4 mb-4">
-              <div className="avatar">
-                <div className="w-14 rounded-full">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt=""
-                  />
+            {user && (
+              <div className="flex items-center gap-4 mb-4">
+                <div className="avatar">
+                  <div className="w-14 rounded-full">
+                    <img src={user?.photoURL} alt="" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">{user?.displayName}</h3>
+                  <p className="text-sm opacity-70">{user?.email}</p>
                 </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-lg">User Name</h3>
-                <p className="text-sm opacity-70">user@email.com</p>
-              </div>
-            </div>
+            )}
 
             {/* Menu Links */}
             <ul className="menu space-y-2">{navLinks}</ul>

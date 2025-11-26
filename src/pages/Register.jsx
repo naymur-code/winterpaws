@@ -1,18 +1,60 @@
-import React, { useContext } from "react";
-import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const Register = () => {
+  const [error, setError] = useState("");
   const { googleLogin, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
+  // google sigIn
   const googleLoginHandler = () => {
     googleLogin()
       .then((result) => {
         setUser(result.user);
+        navigate("/");
       })
       .catch((error) => console.log(error));
     console.log("ff");
+  };
+
+  // email password register
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const photoUrl = e.target.photoUrl.value;
+    const password = e.target.password.value;
+
+    // password validation!
+    const uppercase = /[A-Z]/;
+    const lowercase = /[a-z]/;
+
+    if (password.length < 6) {
+      setError("Length must be at least 6 character");
+      return;
+    } else if (!uppercase.test(password)) {
+      return setError("Must have an Uppercase letter in the password");
+    } else if (!lowercase.test(password)) {
+      return setError("Must have an Lowercase letter in the password");
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photoUrl,
+        })
+          .then(() => {
+            setUser(result.user);
+            navigate("/");
+          })
+          .catch((error) => setError(error.message));
+        // setUser(result.user)
+      })
+      .catch((error) => setError(error.message));
   };
 
   return (
@@ -27,38 +69,51 @@ const Register = () => {
       <div className="flex justify-center items-center my-8">
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl border border-gray-200">
           <div className="card-body">
-            <fieldset className="fieldset gap-4">
-              <label className="label">Full Name</label>
-              <input
-                name="name"
-                type="email"
-                className="input"
-                placeholder="Enter your full name"
-              />
-              <label className="label">Email Address</label>
-              <input
-                name="email"
-                type="email"
-                className="input"
-                placeholder="your@email.com"
-              />
-              <label className="label">Profile Photo URL (Optional)</label>
-              <input
-                type="email"
-                className="input"
-                placeholder="https://example.com/photo.jpg"
-              />
-              <label className="label">Confirm Password</label>
-              <input
-                type="password"
-                className="input"
-                placeholder="Create a strong password"
-              />
-              <div>
-                <a className="link link-hover">Forgot password?</a>
-              </div>
-              <button className="btn btn-info mt-4">Create Account</button>
-            </fieldset>
+            {error && <small className="text-red-400">{error}</small>}
+
+            <form onSubmit={handleSubmit} action="">
+              <fieldset className="fieldset gap-4">
+                <label className="label">Full Name</label>
+                <input
+                  name="name"
+                  type="text"
+                  className="input"
+                  placeholder="Enter your full name"
+                />
+
+                <label className="label">Email Address</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="input"
+                  placeholder="dsf@gmail.com"
+                  required
+                />
+
+                <label className="label">Profile Photo URL (Optional)</label>
+                <input
+                  name="photoUrl"
+                  type="text"
+                  className="input"
+                  placeholder="https://example.com/photo.jpg"
+                />
+
+                <label className="label">Confirm Password</label>
+                <input
+                  type="password"
+                  className="input"
+                  name="password"
+                  placeholder="Create a strong password"
+                  required
+                />
+
+                <div>
+                  <a className="link link-hover">Forgot password?</a>
+                </div>
+                <button className="btn btn-info mt-4">Create Account</button>
+              </fieldset>
+            </form>
+
             <div className="flex gap-2">
               <hr className="text-gray-200 my-4 w-full" />
               <p className="w-full">Or continue with</p>
