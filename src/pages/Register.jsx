@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
+  const { googleLogin, setUser } = useContext(AuthContext);
+
+  const googleLoginHandler = () => {
+    googleLogin()
+      .then((result) => {
+        setUser(result.user);
+      })
+      .catch((error) => console.log(error));
+    console.log("ff");
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center flex-col mt-10">
@@ -53,7 +65,10 @@ const Register = () => {
               <hr className="text-gray-200 my-4 w-full" />
             </div>
             <div className="w-full text-center">
-              <button className="w-full btn bg-white text-black border-[#e5e5e5]">
+              <button
+                onClick={googleLoginHandler}
+                className="w-full btn bg-white text-black border-[#e5e5e5]"
+              >
                 <svg
                   aria-label="Google logo"
                   width="16"
