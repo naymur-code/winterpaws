@@ -6,7 +6,7 @@ import { auth } from "../firebase/firebase.config";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const { googleLogin, setUser } = useContext(AuthContext);
+  const { googleLogin, setUser, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // google sigIn
@@ -14,6 +14,8 @@ const Register = () => {
     googleLogin()
       .then((result) => {
         setUser(result.user);
+        setLoading(false);
+
         navigate("/");
       })
       .catch((error) => console.log(error));
@@ -49,6 +51,7 @@ const Register = () => {
         })
           .then(() => {
             setUser(result.user);
+            setLoading(false);
             navigate("/");
           })
           .catch((error) => setError(error.message));
@@ -107,9 +110,6 @@ const Register = () => {
                   required
                 />
 
-                <div>
-                  <a className="link link-hover">Forgot password?</a>
-                </div>
                 <button className="btn btn-info mt-4">Create Account</button>
               </fieldset>
             </form>
