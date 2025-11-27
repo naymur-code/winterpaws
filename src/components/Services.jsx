@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Service from "./Service";
 import axios from "axios";
+import { Link } from "react-router";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -21,10 +22,18 @@ const Services = () => {
           your pets warm, safe, and happy during the cold months
         </p>
       </div>
-      <div className="grid md:grid-cols-3 grid-cols-1 gap-5 my-10">
+      <div className="grid md:grid-cols-3 grid-cols-1 md:gap-x-20 md:gap-y-10 gap-8 my-10">
         {services.map((service) => (
           <Service key={service.serviceId} service={service} />
         ))}
+      </div>
+      <div className="flex justify-center">
+        <Link
+          to="/services"
+          className="btn btn-xs sm:btn-md md:btn-md lg:btn-lg xl:btn-xl md:my-4 my-2 btn-outline btn-info"
+        >
+          View All Services
+        </Link>
       </div>
     </div>
   );

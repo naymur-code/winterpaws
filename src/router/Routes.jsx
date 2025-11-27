@@ -18,10 +18,25 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/home", element: <Home /> },
       { path: "/services", element: <Services /> },
-      { path: "/profile", element: <MyProfile /> },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
-      { path: "/service/:id", element: <PrivateRoute> <ServiceDetails /> </PrivateRoute> },
+      {
+        path: "/service/:id",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <ServiceDetails />{" "}
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

@@ -7,16 +7,15 @@ import { auth } from "../firebase/firebase.config";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-  const [drawerOpen, setDrawerOpen] = useState(false); 
-  
-  const handleLogout=()=>{
-    signOut(auth)
-    .then(()=>{
-      console.log('Sign-out successful.');
-    })
-    .catch(error=>console.log(error))
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  }
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => console.log(error));
+  };
   const navLinks = (
     <>
       <li>
@@ -34,11 +33,7 @@ const Navbar = () => {
           My Profile
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/register" onClick={() => setDrawerOpen(false)}>
-          Register
-        </NavLink>
-      </li>
+ 
     </>
   );
 
@@ -84,21 +79,32 @@ const Navbar = () => {
         </div>
 
         {/* Desktop */}
+
         {user ? (
-          <div className="navbar-end hidden lg:flex gap-4">
-            <div className="flex items-center gap-2 mb-2">
+          <div className="navbar-end hidden lg:flex items-center gap-4">
+            {/* Avatar with hover-name */}
+            <div className="relative group cursor-pointer">
               <div className="avatar">
                 <div className="w-11 rounded-full">
-                  <img src={user?.photoURL} alt="" />
+                  <img src={user?.photoURL} alt="User Avatar" />
                 </div>
               </div>
-              <div>
-                <h3 className="font-semibold text-base">{user?.displayName}</h3>
-                <p className="text-sm opacity-70">{user?.email}</p>
+
+              {/* Hover Display Name */}
+              <div
+                className="absolute left-1/2 -translate-x-1/2 mt-2 
+                   bg-base-200 text-sm px-3 py-1 rounded shadow 
+                   hidden group-hover:block whitespace-nowrap z-50"
+              >
+                {user?.displayName}
               </div>
             </div>
 
-            <button onClick={handleLogout} className="btn btn-error text-white btn-sm px-5">
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="btn btn-error text-white btn-sm px-5"
+            >
               Logout
             </button>
           </div>
@@ -134,7 +140,18 @@ const Navbar = () => {
             <ul className="menu space-y-2">{navLinks}</ul>
 
             {/* Logout */}
-            <Link className="btn btn-error text-white mt-4 w-full">Logout</Link>
+            {user ? (
+              <Link className="btn btn-error text-white mt-4 w-full">
+                Logout
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-outline btn-info w-full mt-4"
+              >
+                Login
+              </Link>
+            )}
           </div>
 
           {/* Clicking outside closes drawer */}

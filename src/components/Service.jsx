@@ -1,20 +1,23 @@
 import { FaRegStar } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router";
+import { motion } from "motion/react";
 
 const Service = ({ service }) => {
-  const { serviceName, image, description, rating,price,serviceId } = service;
+  const { serviceName, image, description, rating, price, serviceId } = service;
   return (
-    <div className="card bg-base-100  shadow-sm">
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      className="card bg-base-100  shadow-sm"
+    >
       <figure>
         <div className="absolute top-2 right-2">
-            <button className="btn btn-md btn-info">${price}</button>
-
+          <button className="btn btn-md btn-info">${price}</button>
         </div>
         <img
           src={image}
           alt="Shoes"
-          className="h-[410px] w-full object-cover object-top"
+          className="h-[350px] w-full object-cover object-top"
         />
       </figure>
       <div className="card-body md:px-10 py-6">
@@ -34,10 +37,12 @@ const Service = ({ service }) => {
         <p>{description}</p>
 
         <div className="card-actions justify-end">
-          <Link to={`/service/${serviceId}`} className="btn btn-info w-full">View Details</Link>
+          <Link to={`/service/${serviceId}`} className="btn btn-info w-full">
+            View Details
+          </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
