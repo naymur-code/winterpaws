@@ -29,6 +29,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink to="/teams" onClick={() => setDrawerOpen(false)}>
+          Teams
+        </NavLink>
+      </li>
+      <li>
         <NavLink to="/profile" onClick={() => setDrawerOpen(false)}>
           My Profile
         </NavLink>
@@ -155,6 +160,11 @@ const Navbar = () => {
               <li>
                 <NavLink to="/services" onClick={() => setDrawerOpen(false)}>
                   Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/teams" onClick={() => setDrawerOpen(false)}>
+                  Teams
                 </NavLink>
               </li>
               <li>

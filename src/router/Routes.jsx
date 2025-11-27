@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Error from "../pages/Error";
 import ServiceDetails from "../pages/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
+import OurTeam from "../pages/OurTeam";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       },
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
+      { path: "/teams", element: <OurTeam/> },
       {
         path: "/service/:id",
         element: (
