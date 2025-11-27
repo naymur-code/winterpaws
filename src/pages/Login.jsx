@@ -1,5 +1,8 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useContext, useState } from "react";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import React, { useContext, useRef, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { auth } from "../firebase/firebase.config";
 import { AuthContext } from "../provider/AuthProvider";
@@ -9,8 +12,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
-  console.log(location);
+  const emailRef = useRef();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -44,6 +46,17 @@ const Login = () => {
       .catch((error) => console.log(error));
   };
 
+  // forget Password
+  const forgetPassword = () => {
+    const email = emailRef.current.value;
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("email reset ");
+        window.open("https://mail.google.com/mail/");
+      })
+      .catch((error) => setError(error.message));
+  };
+
   return (
     <div>
       <div className="flex justify-center items-center flex-col mt-10">
@@ -61,6 +74,7 @@ const Login = () => {
               <fieldset className="fieldset gap-3">
                 <label className="label">Email Address</label>
                 <input
+                  ref={emailRef}
                   name="email"
                   type="email"
                   className="input"
@@ -75,7 +89,9 @@ const Login = () => {
                   placeholder="Enter your password"
                 />
                 <div>
-                  <a className="link link-hover">Forgot password?</a>
+                  <a onClick={forgetPassword} className="link link-hover">
+                    Forgot password?
+                  </a>
                 </div>
                 <button className="btn btn-info mt-4">Sign In</button>
               </fieldset>
