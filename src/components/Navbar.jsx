@@ -33,7 +33,6 @@ const Navbar = () => {
           My Profile
         </NavLink>
       </li>
- 
     </>
   );
 
@@ -119,8 +118,18 @@ const Navbar = () => {
 
       {/* Full Page Drawer */}
       {drawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50">
-          <div className="fixed top-0 right-0 w-3/4 max-w-sm min-h-full bg-base-200 p-6 shadow-lg overflow-auto">
+        <>
+          {/* Dark overlay - closes drawer */}
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setDrawerOpen(false)}
+          ></div>
+
+          {/* Drawer */}
+          <div
+            className="fixed top-0 right-0 w-3/4 max-w-sm min-h-full 
+                    bg-base-200 p-6 shadow-lg overflow-auto z-50"
+          >
             {/* Avatar */}
             {user && (
               <div className="flex items-center gap-4 mb-4">
@@ -137,29 +146,46 @@ const Navbar = () => {
             )}
 
             {/* Menu Links */}
-            <ul className="menu space-y-2">{navLinks}</ul>
+            <ul className="menu space-y-2">
+              <li>
+                <NavLink to="/home" onClick={() => setDrawerOpen(false)}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/services" onClick={() => setDrawerOpen(false)}>
+                  Services
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" onClick={() => setDrawerOpen(false)}>
+                  My Profile
+                </NavLink>
+              </li>
+            </ul>
 
-            {/* Logout */}
+            {/* Logout / Login */}
             {user ? (
-              <Link className="btn btn-error text-white mt-4 w-full">
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setDrawerOpen(false);
+                }}
+                className="btn btn-error text-white mt-4 w-full"
+              >
                 Logout
-              </Link>
+              </button>
             ) : (
               <Link
                 to="/login"
+                onClick={() => setDrawerOpen(false)}
                 className="btn btn-outline btn-info w-full mt-4"
               >
                 Login
               </Link>
             )}
           </div>
-
-          {/* Clicking outside closes drawer */}
-          <div
-            className="fixed inset-0"
-            onClick={() => setDrawerOpen(false)}
-          ></div>
-        </div>
+        </>
       )}
     </div>
   );
