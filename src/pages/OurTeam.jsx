@@ -6,57 +6,49 @@ const OurTeam = () => {
     {
       id: 1,
       name: "Dr. Anika Rahman",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/2.jpg",
+      image: "https://i.ibb.co/GQxXtqn1/1.jpg",
       role: "Veterinary Surgeon",
     },
     {
       id: 2,
-      name: "Dr. Kamrul Hasan",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/1.jpg",
+      name: "Dr. Sumaiya Akhter",
+      image: "https://i.ibb.co/LzDy0sRL/2.jpg",
       role: "Pet Nutrition Specialist",
     },
     {
       id: 3,
       name: "Dr. Lucas Bennett",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/11.jpg",
+      image: "https://i.ibb.co/d4KtrXnf/3.jpg",
       role: "Animal Behavior Expert",
     },
     {
       id: 4,
       name: "Dr. Sophia Lane",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/10.jpg",
+      image: "https://i.ibb.co/W49nY6Kt/5.jpg",
       role: "Veterinary Dentist",
     },
     {
       id: 5,
       name: "Dr. Noah Carter",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/3.jpg",
+      image: "https://i.ibb.co/ZpZ5jwCx/10.jpg",
       role: "Veterinary Cardiologist",
     },
     {
       id: 6,
       name: "Dr. Rafiul Islam",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/4.jpg",
+      image: "https://i.ibb.co/jkzDKTS6/11.jpg",
       role: "Animal Nutrition Expert",
     },
     {
       id: 7,
-      name: "Dr. Sumaiya Akhter",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/5.jpg",
+      name: " Dr. Ayon Mahmud",
+      image: "https://i.ibb.co.com/GQxXtqn1/1.jpg",
       role: "Pet Behavior Therapist",
     },
     {
       id: 8,
-      name: "Dr. Ayon Mahmud",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/6.jpg",
+      name: "Dr. Sumaiya Akhter",
+      image: "https://i.ibb.co.com/LzDy0sRL/2.jpg",
       role: "Veterinary Surgeon",
     },
   ];
