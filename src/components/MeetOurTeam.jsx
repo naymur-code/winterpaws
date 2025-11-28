@@ -6,31 +6,28 @@ const MeetOurTeam = () => {
     {
       id: 1,
       name: "Dr. Anika Rahman",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/2.jpg",
+      image: "https://i.ibb.co.com/LzDy0sRL/2.jpg",
       role: "Veterinary Surgeon",
     },
     {
       id: 2,
       name: "Dr. Kamrul Hasan",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/1.jpg",
+      image: "https://i.ibb.co.com/d4KtrXnf/3.jpg",
       role: "Pet Nutrition Specialist",
     },
     {
       id: 3,
       name: "Dr. Lucas Bennett",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/11.jpg",
+      image: "https://i.ibb.co.com/W49nY6Kt/5.jpg",
       role: "Animal Behavior Expert",
     },
     {
       id: 4,
       name: "Dr. Sophia Lane",
-      image:
-        "https://newkit.creativemox.com/pawelle/wp-content/uploads/sites/4/2025/11/10.jpg",
+      image: "https://i.ibb.co.com/ZpZ5jwCx/10.jpg",
       role: "Veterinary Dentist",
     },
+
   ];
 
   return (
